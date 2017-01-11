@@ -8,7 +8,11 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
   },
+  "files": [
+    "typings/globals/jquery/index.d.ts"
+  ],
   "exclude": [
+
     "node_modules",
     "dist"
   ]
