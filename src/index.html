@@ -6,7 +6,8 @@
 
 <body>
 
-<table width="100%">
+<form id="badge_form">
+  <table width="100%">
   <tr>
     <td width="100%" valign="top">
 
@@ -14,7 +15,7 @@
         <tr>
           <td width="40%">Size (width/height):</td>
           <td width="60%">
-            <input type="text" name="width">
+            <input type="text" name="width" value="2">
             <input type="text" name="height">
           </td>
         </tr>
@@ -85,6 +86,7 @@
     </td>
   </tr>
 </table>
+</form>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -180,7 +182,7 @@
   };
 
   $(document).ready(function () {
-    RunApplication(options);
+    it7badgeLivePreview(options);
   })
 
 </script>

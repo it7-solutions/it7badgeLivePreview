@@ -1,5 +1,5 @@
-import {PluginOptions} from "./models/PluginOptions";
-import {canvasOptions} from "./models/canvasOptions";
+import {PluginOptions} from "../models/PluginOptions";
+import {canvasOptions} from "../models/canvasOptions";
 export class PluginConfig {
     canvasOptions: canvasOptions;
     width: number;

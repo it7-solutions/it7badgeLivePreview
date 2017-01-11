@@ -1,10 +1,10 @@
 /// <reference path="../types.d.ts" />
-import {PluginConfig} from "./PluginConfig";
+import {PluginConfig} from "./services/pluginConfig";
 import {App} from './app';
 
-export function RunApplication(options: PluginConfig) {
+export function it7badgeLivePreview(options: PluginConfig) {
   console.log('options', options);
 
   new App(options);
 }
-window['RunApplication'] = RunApplication;
+window['it7badgeLivePreview'] = it7badgeLivePreview;

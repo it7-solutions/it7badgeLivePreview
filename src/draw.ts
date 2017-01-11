@@ -1,4 +1,4 @@
-import {PluginConfig} from "./PluginConfig";
+import {PluginConfig} from "./services/pluginConfig";
 export class Draw {
     constructor(private options: PluginConfig) {}
 
@@ -14,5 +14,10 @@ export class Draw {
         var ctx: any = canvas.getContext("2d");
         ctx.fillStyle = this.options.canvasOptions.background;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
+        $(document).on('change', '#badge_form', function () {
+            console.log('change');
+        })
     }
 }
