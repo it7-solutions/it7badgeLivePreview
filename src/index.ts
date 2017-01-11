@@ -1,33 +1,10 @@
 /// <reference path="../types.d.ts" />
-import {Test} from './Test';
+import {PluginConfig} from "./PluginConfig";
+import {App} from './app';
 
-export class Person {
+export function RunApplication(options: PluginConfig) {
+  console.log('options', options);
 
-  constructor(name:string) {
-    this.name=name;
-  }
-  name: string;
-
-  greet():void {
-    console.log('greetings');
-  }
-
+  new App(options);
 }
-
-function greeter (person:Person){
-  return "Hello " + person.name;
-}
-
-var person = new Person("Vladimir");
-
-$(document).ready(function () {
-  console.log('ready');
-  var message = greeter(person);
-  $("#status").html(message);
-
-  var hi = new Test('There');
-  hi.sayHi();
-});
-
-
-person.greet();
+window['RunApplication'] = RunApplication;

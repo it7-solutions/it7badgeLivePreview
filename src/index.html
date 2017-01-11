@@ -6,8 +6,184 @@
 
 <body>
 
-<h1>Hello World!</h1>
-<div id="status"></div>
+<table width="100%">
+  <tr>
+    <td width="100%" valign="top">
+
+      <table width="100%">
+        <tr>
+          <td width="40%">Size (width/height):</td>
+          <td width="60%">
+            <input type="text" name="width">
+            <input type="text" name="height">
+          </td>
+        </tr>
+        <tr>
+          <td>Paper orientation:</td>
+          <td>
+            <select name="paper_orientation">
+              <option value="P">Portrait</option>
+              <option value="L">Landscape</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Paper Format:</td>
+          <td>
+            <select name="paper_format">
+              <option value="A4">A4</option>
+              <option value="A5">A5</option>
+              <option value="CREDIT_CARD">CREDIT_CARD</option>
+              <option value="Letter">Letter</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Content Position:</td>
+          <td>
+            <select name="content_position">
+              <option value="center">Center</option>
+              <option value="left">Left</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Number of columns:</td>
+          <td>
+            <input type="text" name="columns_count">
+          </td>
+        </tr>
+        <tr>
+          <td>Left margin:</td>
+          <td>
+            <input type="text" name="left_margin">
+          </td>
+        </tr>
+        <tr>
+          <td>Top margin:</td>
+          <td>
+            <input type="text" name="top_margin">
+          </td>
+        </tr>
+        <tr>
+          <td>Right Badge Margin:</td>
+          <td>
+            <input type="text" name="right_b_margin">
+          </td>
+        </tr>
+        <tr>
+          <td>Bottom Badge Margin:</td>
+          <td>
+            <input type="text" name="bottom_b_margin">
+          </td>
+        </tr>
+      </table>
+
+    </td>
+    <td>
+      <div id="addCanvas"></div>
+    </td>
+  </tr>
+</table>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<script>
+  var options = {
+    canvasOptions: {
+      selector: '#addCanvas',
+      width: 800,
+      height: 500,
+      background: '#e8e8e8'
+    },
+    width: 100,
+    height: 100,
+    columns_count: 2,
+    top_margin: 25,
+    left_margin: 25,
+    paper_orientation: {
+      L: {
+        value: 'L',
+        label: 'Landscape'
+      },
+      P: {
+        value: 'P',
+        label: 'Portrait'
+      }
+    },
+    content_position: {
+      center: {
+        value: 'center',
+        label: 'center'
+      },
+      left: {
+        value: 'left',
+        label: 'left'
+      }
+    },
+    right_b_margin: 50,
+    bottom_b_margin: 50,
+    formats: {
+      A4: {
+        L: {
+          height: 210,
+          width: 297
+        },
+        P: {
+          height: 297,
+          width: 210
+        }
+      },
+      A5: {
+        L: {
+          height: 148,
+          width: 210
+        },
+        P: {
+          height: 210,
+          width: 148
+        }
+      },
+      A6: {
+        L: {
+          height: 105,
+          width: 148
+        },
+        P: {
+          height: 148,
+          width: 105
+        }
+      },
+      CREDIT_CARD: {
+        L: {
+          height: 54,
+          width: 86
+        },
+        P: {
+          height: 86,
+          width: 54
+        }
+      },
+      Letter: {
+        L: {
+          height: 216,
+          width: 279
+        },
+        P: {
+          height: 279,
+          width: 216
+        }
+      }
+    }
+  };
+
+  $(document).ready(function () {
+    RunApplication(options);
+  })
+
+</script>
+
 </body>
 </html>
