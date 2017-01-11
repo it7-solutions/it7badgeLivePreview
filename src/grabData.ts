@@ -22,7 +22,21 @@ export class GrabData {
         console.log('grabData');
         console.log(this.fieldsValues);
 
+        console.log('foundWidthHeight', this.getPaperSize());
+
         return this.fieldsValues;
+    }
+
+    private getPaperSize() {
+        // find orientation objects by format with sizes (L,P)
+        let foundFormat = _.find(this.options.formats, (i, value: any) => {
+            return value === this.fieldsValues.paperFormat;
+        });
+
+        // find needed width/height object by orientation
+        return _.find(foundFormat, (i, value: any) => {
+            return value === this.fieldsValues.paperOrientation;
+        });
     }
 
 
