@@ -6,13 +6,12 @@ export class App {
     constructor(private options: PluginOptions) {
         var grabData = new GrabData(options);
         let fieldsData = grabData.grabData();
-
-        console.log('fieldsData', fieldsData);
+        let dataToDraw: any = grabData.dataToDraw();
 
         var calculateData = new CalculateData(fieldsData);
         calculateData.calculateData();
 
-        var draw = new Draw(options);
-        draw.drawCanvas();
+        var draw = new Draw(options, dataToDraw);
+        draw.drawAll();
     }
 }

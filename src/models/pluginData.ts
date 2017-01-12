@@ -9,4 +9,5 @@ export interface PluginData {
     topMargin           : number;
     rightBadgeMargin    : number;
     bottomBadgeMargin   : number;
+    // paperSize           : any;
 }
