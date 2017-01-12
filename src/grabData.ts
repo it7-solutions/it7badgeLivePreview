@@ -20,11 +20,9 @@ export class GrabData {
 
     grabData(): PluginData {
         console.log('grabData');
-        console.log(this.fieldsValues);
 
-        console.log('foundWidthHeight', this.getPaperSize());
-
-        return this.fieldsValues;
+        // add paper size option to draw properties object and return it
+        return (<any>Object).assign(this.fieldsValues, {paperSize: this.getPaperSize()});
     }
 
     private getPaperSize() {
