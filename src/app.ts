@@ -5,10 +5,12 @@ import {CalculateData} from "./calculateData";
 export class App {
     constructor(private options: PluginOptions) {
         var grabData = new GrabData(options);
-        let fieldsData = grabData.grabData();
+        // let fieldsData = grabData.grabData();
         let dataToDraw: any = grabData.dataToDraw();
 
-        var calculateData = new CalculateData(fieldsData);
+        let paperSize = grabData.getPaperSize();
+
+        var calculateData = new CalculateData((<any>Object).assign(options, {paperSize: paperSize}));
         calculateData.calculateData();
 
         var draw = new Draw(options, dataToDraw);

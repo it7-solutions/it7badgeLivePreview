@@ -35,7 +35,7 @@ export class GrabData {
         return paperSize;
     }
 
-    private getPaperSize() {
+    getPaperSize() {
         // find orientation objects by format with sizes (L,P)
         let foundFormat = _.find(this.options.formats, (i, value: any) => {
             return value === this.fieldsValues.paperFormat;

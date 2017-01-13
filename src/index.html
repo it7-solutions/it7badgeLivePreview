@@ -97,38 +97,20 @@
   var options = {
     canvasOptions: {
       selector: '#addCanvas',
-      width: 800,
+      width: 500,
       height: 500,
       canvasBackground: '#e8e8e8',
       paperBackground: '#ffffff'
     },
     width: 100,
     height: 100,
-    columns_count: 2,
-    top_margin: 25,
-    left_margin: 25,
-    paper_orientation: {
-      L: {
-        value: 'L',
-        label: 'Landscape'
-      },
-      P: {
-        value: 'P',
-        label: 'Portrait'
-      }
-    },
-    content_position: {
-      center: {
-        value: 'center',
-        label: 'center'
-      },
-      left: {
-        value: 'left',
-        label: 'left'
-      }
-    },
-    right_b_margin: 50,
-    bottom_b_margin: 50,
+    columnsCount: 2,
+    topMargin: 25,
+    leftMargin: 25,
+    paperOrientation: "P",
+    contentPosition: "center",
+    rightBadgeMargin: 50,
+    bottomBadgeMargin: 50,
     formats: {
       A4: {
         L: {
