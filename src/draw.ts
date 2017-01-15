@@ -1,8 +1,9 @@
 import {PluginConfig} from "./services/pluginConfig";
 import {DataToDraw} from "./models/dataToDraw";
 export class Draw {
-    constructor(private options: PluginConfig, private dataToDraw: DataToDraw) {
+    constructor(private options: PluginConfig, private dataToDraw: DataToDraw, private paperSizeToAdapt: any) {
         console.log('dataToDraw', dataToDraw);
+        console.log('sizeToAdapt', paperSizeToAdapt);
     }
 
     canvas: any = document.createElement('canvas');
@@ -12,10 +13,10 @@ export class Draw {
         this.drawCanvas();
 
         this.drawPaper(
-            this.options.canvasOptions.width / 2 - this.dataToDraw.paperSize.width / 2,
-            this.options.canvasOptions.height / 2 - this.dataToDraw.paperSize.height / 2,
-            this.dataToDraw.paperSize.width,
-            this.dataToDraw.paperSize.height,
+            this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.options.canvasOptions.borderSpace,
+            this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.options.canvasOptions.borderSpace,
+            this.paperSizeToAdapt.width,
+            this.paperSizeToAdapt.height,
             this.options.canvasOptions.paperBackground);
     }
 

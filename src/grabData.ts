@@ -29,10 +29,19 @@ export class GrabData {
     }
 
     dataToDraw() {
-        let paperSize: DataToDraw = {
-            paperSize: this.getPaperSize()
+        let dataToDraw: DataToDraw = {
+            paperSize: this.getPaperSize(),
+            maxDrawArea: this.getMaxDrawArea()
         };
-        return paperSize;
+        return dataToDraw;
+    }
+
+    getMaxDrawArea() {
+        let maxDrawArea: any = {
+            width: this.options.canvasOptions.width - 2 * this.options.canvasOptions.borderSpace,
+            height: this.options.canvasOptions.height - 2 * this.options.canvasOptions.borderSpace
+        };
+        return maxDrawArea;
     }
 
     getPaperSize() {

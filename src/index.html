@@ -15,16 +15,16 @@
         <tr>
           <td width="40%">Size (width/height):</td>
           <td width="60%">
-            <input type="text" name="width" value="2">
-            <input type="text" name="height">
+            <input type="text" name="width" value="100">
+            <input type="text" name="height" value="200">
           </td>
         </tr>
         <tr>
           <td>Paper orientation:</td>
           <td>
             <select name="paper_orientation">
-              <option value="P">Portrait</option>
-              <option value="L">Landscape</option>
+              <option value="P" selected>Portrait</option>
+              <option value="L" >Landscape</option>
             </select>
           </td>
         </tr>
@@ -32,7 +32,7 @@
           <td>Paper Format:</td>
           <td>
             <select name="paper_format">
-              <option value="A4">A4</option>
+              <option value="A4" selected>A4</option>
               <option value="A5">A5</option>
               <option value="CREDIT_CARD">CREDIT_CARD</option>
               <option value="Letter">Letter</option>
@@ -43,7 +43,7 @@
           <td>Content Position:</td>
           <td>
             <select name="content_position">
-              <option value="center">Center</option>
+              <option value="center" selected>Center</option>
               <option value="left">Left</option>
             </select>
           </td>
@@ -51,31 +51,31 @@
         <tr>
           <td>Number of columns:</td>
           <td>
-            <input type="text" name="columns_count">
+            <input type="text" name="columns_count" value="1">
           </td>
         </tr>
         <tr>
           <td>Left margin:</td>
           <td>
-            <input type="text" name="left_margin">
+            <input type="text" name="left_margin" value="50">
           </td>
         </tr>
         <tr>
           <td>Top margin:</td>
           <td>
-            <input type="text" name="top_margin">
+            <input type="text" name="top_margin" value="60">
           </td>
         </tr>
         <tr>
           <td>Right Badge Margin:</td>
           <td>
-            <input type="text" name="right_b_margin">
+            <input type="text" name="right_b_margin" value="25">
           </td>
         </tr>
         <tr>
           <td>Bottom Badge Margin:</td>
           <td>
-            <input type="text" name="bottom_b_margin">
+            <input type="text" name="bottom_b_margin" value="45">
           </td>
         </tr>
       </table>
@@ -99,6 +99,7 @@
       selector: '#addCanvas',
       width: 500,
       height: 500,
+      borderSpace: 50,
       canvasBackground: '#e8e8e8',
       paperBackground: '#ffffff'
     },

@@ -1,3 +1,4 @@
 export interface DataToDraw {
-    paperSize: any
+    paperSize: any,
+    maxDrawArea: any
 }
