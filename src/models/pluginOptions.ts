@@ -8,6 +8,7 @@ export interface PluginOptions  {
     leftMargin: number,
     // paperOrientations: any[],
     paperOrientation: string,
+    paperFormat: string,
     contentPosition: string,
     rightBadgeMargin: number,
     bottomBadgeMargin: number,

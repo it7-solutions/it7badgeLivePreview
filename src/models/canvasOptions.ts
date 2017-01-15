@@ -5,4 +5,5 @@ export interface canvasOptions {
     borderSpace         : number;
     canvasBackground    : string;
     paperBackground     : string;
+    badgeBackground     : string;
 }

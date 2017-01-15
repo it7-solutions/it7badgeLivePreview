@@ -8,6 +8,7 @@ export class PluginConfig {
     topMargin: number;
     leftMargin: number;
     paperOrientation: string;
+    paperFormat: string;
     contentPosition: string;
     rightBadgeMargin: number;
     bottomBadgeMargin: number;
@@ -20,6 +21,7 @@ export class PluginConfig {
         this.topMargin = options.topMargin;
         this.leftMargin = options.leftMargin;
         this.paperOrientation = options.paperOrientation;
+        this.paperFormat = options.paperFormat;
         this.contentPosition = options.contentPosition;
         this.rightBadgeMargin = options.rightBadgeMargin;
         this.bottomBadgeMargin = options.bottomBadgeMargin;

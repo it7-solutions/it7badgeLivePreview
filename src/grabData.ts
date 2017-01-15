@@ -47,12 +47,12 @@ export class GrabData {
     getPaperSize() {
         // find orientation objects by format with sizes (L,P)
         let foundFormat = _.find(this.options.formats, (i, value: any) => {
-            return value === this.fieldsValues.paperFormat;
+            return value === this.options.paperFormat;
         });
 
         // find needed width/height object by orientation
         return _.find(foundFormat, (i, value: any) => {
-            return value === this.fieldsValues.paperOrientation;
+            return value === this.options.paperOrientation;
         });
     }
 

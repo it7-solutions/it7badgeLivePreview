@@ -3,7 +3,7 @@ import {DataToDraw} from "./models/dataToDraw";
 export class Draw {
     constructor(private options: PluginConfig, private dataToDraw: DataToDraw, private paperSizeToAdapt: any) {
         console.log('dataToDraw', dataToDraw);
-        console.log('sizeToAdapt', paperSizeToAdapt);
+        console.log('paperSizeToAdapt', paperSizeToAdapt);
     }
 
     canvas: any = document.createElement('canvas');
@@ -13,11 +13,38 @@ export class Draw {
         this.drawCanvas();
 
         this.drawPaper(
-            this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.options.canvasOptions.borderSpace,
-            this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.options.canvasOptions.borderSpace,
+            this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.options.canvasOptions.borderSpace, //paper top corner x
+            this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.options.canvasOptions.borderSpace, //paper top corner y
             this.paperSizeToAdapt.width,
             this.paperSizeToAdapt.height,
-            this.options.canvasOptions.paperBackground);
+            this.options.canvasOptions.paperBackground
+        );
+
+        // TODO Continue....
+        if(this.options.paperOrientation === 'P') {
+            this.drawBadge(
+                this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.options.canvasOptions.borderSpace, //badge top corner x
+                this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.options.canvasOptions.borderSpace, //badge top corner y
+
+                this.options.width * this.paperSizeToAdapt.ratio / this.paperSizeToAdapt.zoomRatio.kh, //badge width * ratio
+                this.options.height * this.paperSizeToAdapt.ratio / this.paperSizeToAdapt.zoomRatio.kh, //badge height * ratio
+
+                this.options.canvasOptions.badgeBackground
+            );
+        } else {
+            this.drawBadge(
+                this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.options.canvasOptions.borderSpace, //badge top corner x
+                this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.options.canvasOptions.borderSpace, //badge top corner y
+
+                this.options.width * this.paperSizeToAdapt.ratio / this.paperSizeToAdapt.zoomRatio.kh  , //badge width * ratio
+                this.options.height * this.paperSizeToAdapt.ratio / this.paperSizeToAdapt.zoomRatio.kh , //badge height * ratio
+
+                this.options.canvasOptions.badgeBackground
+            );
+        }
+        // TODO end todo
+
+
     }
 
     private drawCanvas() {
@@ -41,6 +68,10 @@ export class Draw {
     }
 
     private drawPaper(x: number, y: number, width: number, height: number, fill: string) {
+        this.drawShape(x, y, width, height, fill);
+    }
+
+    private drawBadge(x: number, y: number, width: number, height: number, fill: string) {
         this.drawShape(x, y, width, height, fill);
     }
 
