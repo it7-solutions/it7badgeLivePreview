@@ -21,10 +21,6 @@ export class App {
             )
         );
 
-
-
-        calculateData.calculateData();
-
         var draw = new Draw(options, dataToDraw, calculateData.calculateData());
         draw.drawAll();
     }
