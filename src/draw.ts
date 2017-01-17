@@ -9,7 +9,17 @@ export class Draw {
         console.log('dataToDraw', dataToDraw);
         console.log('paperSizeToAdapt!!', paperSizeToAdapt);
 
-        this.k = 1;
+        // this.k = 2;
+
+        this.k = this.getRatio(
+            this.dataToDraw.paperSize.width,
+            this.dataToDraw.paperSize.height,
+            this.dataToDraw.maxDrawArea.width,
+            this.dataToDraw.maxDrawArea.height,
+        );
+
+        console.log('this.k', this.k);
+
         this.x = this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.options.canvasOptions.borderSpace;
         this.y = this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.options.canvasOptions.borderSpace;
     }
@@ -25,7 +35,8 @@ export class Draw {
             0, //paper top corner y
             this.paperSizeToAdapt.width,
             this.paperSizeToAdapt.height,
-            this.options.canvasOptions.paperBackground
+            this.options.canvasOptions.paperBackground,
+            this.k
         );
 
         // TODO Continue....
@@ -36,7 +47,8 @@ export class Draw {
                 this.options.width , //badge width * ratio
                 this.options.height , //badge height * ratio
 
-                this.options.canvasOptions.badgeBackground
+                this.options.canvasOptions.badgeBackground,
+                this.k
             );
 
         // TODO end todo
@@ -64,23 +76,22 @@ export class Draw {
         })
     }
 
-    private drawPaper(x: number, y: number, width: number, height: number, fill: string) {
-        this.drawShape(x, y, width, height, fill);
+    private drawPaper(x: number, y: number, width: number, height: number, fill: string, k: number) {
+        this.drawShape(x, y, width / k, height / k, fill, k);
     }
 
-    private drawBadge(x: number, y: number, width: number, height: number, fill: string) {
-        this.drawShape(x, y, width, height, fill);
+    private drawBadge(x: number, y: number, width: number, height: number, fill: string, k: number) {
+        this.drawShape(x, y, width * k , height * k , fill, k);
     }
 
 
 
-    private drawShape(x: number, y: number, w: number, h: number, fill: string) {
-        // console.log('args', arguments);
+    private drawShape(x: number, y: number, w: number, h: number, fill: string, k: number) {
         this.ctx.fillStyle = fill;
         this.ctx.fillRect(
             this.prepareX(x),
             this.prepareY(y),
-            this.prepareSize(w),
+            this.prepareSize(w) ,
             this.prepareSize(h)
         );
     }
@@ -120,6 +131,14 @@ export class Draw {
     //         }
     //     }
     // }
-    
+
+    getRatio(paperWidth: number, paperHeight: number, maxDrawWidth: number, maxDrawHeight: number) {
+        if(paperWidth / paperHeight < 1) {
+            return maxDrawHeight / paperHeight;
+        } else {
+            return maxDrawWidth / paperWidth;
+        }
+    }
+
 
 };
