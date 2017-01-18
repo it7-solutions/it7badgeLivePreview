@@ -9,16 +9,18 @@ export class App {
         var grabData = new GrabData(options);
 
         let paperSize = grabData.getPaperSize();
-        let getMaxDrawArea = grabData.getMaxDrawArea();
+        let maxDrawArea = grabData.getMaxDrawArea();
 
         let calculateData = new CalculateData(
-            (<any>Object).assign(options,
-                {paperSize: paperSize},
-                {maxDrawArea: getMaxDrawArea}
-            )
+            {
+                paperSize: paperSize,
+                maxDrawArea: maxDrawArea
+            }
         );
 
         let grabbedData = grabData.grabData();
+
+        let paperSizeToAdapt = calculateData.calculateData();
 
         let drawData: any = {
             canvasOptions: this.options.canvasOptions,
@@ -31,11 +33,12 @@ export class App {
                 bottomBadgeMargin: grabbedData.bottomBadgeMargin,
                 rightBadgeMargin: grabbedData.rightBadgeMargin
             },
-            paperSize: grabData.getPaperSize(),
-            maxDrawArea: grabData.getMaxDrawArea()
+            paperSize: paperSize,
+            maxDrawArea: maxDrawArea,
+            paperSizeToAdapt: paperSizeToAdapt
         };
 
-        var draw = new Draw(drawData, calculateData.calculateData());
+        var draw = new Draw(drawData);
         draw.drawAll();
     }
 }

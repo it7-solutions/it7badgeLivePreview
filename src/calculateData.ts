@@ -26,7 +26,8 @@ export class CalculateData {
     sizeToAdapt(rectWidth: number, rectHeight: number, k: number) {
         return {
             height: rectHeight * k,
-            width: rectWidth * k
+            width: rectWidth * k,
+            k: k
         };
     }
 
