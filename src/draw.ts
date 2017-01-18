@@ -5,11 +5,9 @@ export class Draw {
     x: number;
     y: number;
 
-    constructor(private options: PluginConfig, private dataToDraw: DataToDraw, private paperSizeToAdapt: any) {
+    constructor(private dataToDraw: any, private paperSizeToAdapt: any) {
         console.log('dataToDraw', dataToDraw);
-        console.log('paperSizeToAdapt!!', paperSizeToAdapt);
-
-        // this.k = 2;
+        console.log('paperSizeToAdapt', paperSizeToAdapt);
 
         this.k = this.getRatio(
             this.dataToDraw.paperSize.width,
@@ -20,8 +18,8 @@ export class Draw {
 
         console.log('this.k', this.k);
 
-        this.x = this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.options.canvasOptions.borderSpace;
-        this.y = this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.options.canvasOptions.borderSpace;
+        this.x = this.dataToDraw.maxDrawArea.width / 2 - this.paperSizeToAdapt.width / 2 + this.dataToDraw.canvasOptions.borderSpace;
+        this.y = this.dataToDraw.maxDrawArea.height / 2 - this.paperSizeToAdapt.height / 2 + this.dataToDraw.canvasOptions.borderSpace;
     }
 
     canvas: any = document.createElement('canvas');
@@ -35,7 +33,7 @@ export class Draw {
             0, //paper top corner y
             this.paperSizeToAdapt.width,
             this.paperSizeToAdapt.height,
-            this.options.canvasOptions.paperBackground,
+            this.dataToDraw.canvasOptions.paperBackground,
             this.k
         );
 
@@ -44,10 +42,10 @@ export class Draw {
                 0, //badge top corner x
                 0, //badge top corner y
 
-                this.options.width , //badge width * ratio
-                this.options.height , //badge height * ratio
+                this.dataToDraw.badge.width , //badge width * ratio
+                this.dataToDraw.badge.height , //badge height * ratio
 
-                this.options.canvasOptions.badgeBackground,
+                this.dataToDraw.canvasOptions.badgeBackground,
                 this.k
             );
 
@@ -60,13 +58,13 @@ export class Draw {
         console.log('drawCanvas');
 
 
-        $(document).find(this.options.canvasOptions.selector).append(this.canvas);
+        $(document).find(this.dataToDraw.canvasOptions.selector).append(this.canvas);
 
-        this.canvas.width = this.options.canvasOptions.width;
-        this.canvas.height = this.options.canvasOptions.height;
+        this.canvas.width = this.dataToDraw.canvasOptions.width;
+        this.canvas.height = this.dataToDraw.canvasOptions.height;
 
 
-        this.ctx.fillStyle = this.options.canvasOptions.canvasBackground;
+        this.ctx.fillStyle = this.dataToDraw.canvasOptions.canvasBackground;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 
@@ -81,7 +79,7 @@ export class Draw {
     }
 
     private drawBadge(x: number, y: number, width: number, height: number, fill: string, k: number) {
-        this.drawShape(x, y, width * k , height * k , fill, k);
+        this.drawShape(x, y, width , height , fill, k);
     }
 
 
@@ -108,29 +106,6 @@ export class Draw {
         // console.log('prepareSize', n, this.k, this.y,n * this.k)
         return n * this.k;
     }
-
-
-    // sizeToAdapt(paperWidth: number, paperHeight: number, maxDrawWidth: number, maxDrawHeight: number) {
-    //     if(this.getRatio(paperWidth, paperHeight) < 1) {
-    //         return {
-    //             height: maxDrawHeight,
-    //             width: (this.getRatio(paperWidth, paperHeight) * maxDrawHeight).toFixed(2),
-    //             ratio: (this.getRatio(paperWidth, paperHeight)).toFixed(2)
-    //         };
-    //     } else if(this.getRatio(paperWidth, paperHeight) > 1) {
-    //         return {
-    //             height: (maxDrawWidth / this.getRatio(paperWidth, paperHeight)).toFixed(2),
-    //             width: maxDrawWidth,
-    //             ratio: (this.getRatio(paperWidth, paperHeight)).toFixed(2)
-    //         };
-    //     } else {
-    //         return {
-    //             height: maxDrawHeight,
-    //             width: maxDrawWidth,
-    //             ratio: 1
-    //         }
-    //     }
-    // }
 
     getRatio(paperWidth: number, paperHeight: number, maxDrawWidth: number, maxDrawHeight: number) {
         if(paperWidth / paperHeight < 1) {

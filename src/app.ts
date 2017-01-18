@@ -7,9 +7,6 @@ export class App {
         console.log('opt', options);
 
         var grabData = new GrabData(options);
-        // let fieldsData = grabData.grabData();
-        let dataToDraw: any = grabData.dataToDraw();
-
 
         let paperSize = grabData.getPaperSize();
         let getMaxDrawArea = grabData.getMaxDrawArea();
@@ -21,7 +18,24 @@ export class App {
             )
         );
 
-        var draw = new Draw(options, dataToDraw, calculateData.calculateData());
+        let grabbedData = grabData.grabData();
+
+        let drawData: any = {
+            canvasOptions: this.options.canvasOptions,
+            badge: {
+                width: grabbedData.width,
+                height: grabbedData.height,
+                contentPosition: grabbedData.contentPosition,
+                leftMargin: grabbedData.leftMargin,
+                topMargin: grabbedData.topMargin,
+                bottomBadgeMargin: grabbedData.bottomBadgeMargin,
+                rightBadgeMargin: grabbedData.rightBadgeMargin
+            },
+            paperSize: grabData.getPaperSize(),
+            maxDrawArea: grabData.getMaxDrawArea()
+        };
+
+        var draw = new Draw(drawData, calculateData.calculateData());
         draw.drawAll();
     }
 }
