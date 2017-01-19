@@ -28,14 +28,15 @@ export class Draw {
         );
 
         this.drawBadge(
-            0, //badge top corner x
-            0, //badge top corner y
+            0 + this.dataToDraw.badge.topMargin, //badge top corner x + margin top
+            0 + this.dataToDraw.badge.leftMargin, //badge top corner y + margin left
 
             this.dataToDraw.badge.width,
             this.dataToDraw.badge.height,
 
             this.dataToDraw.canvasOptions.badgeBackground,
-            this.k
+
+
         );
     }
 
@@ -49,21 +50,23 @@ export class Draw {
 
         this.ctx.fillStyle = this.dataToDraw.canvasOptions.canvasBackground;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 
+    change() {
         $(document).on('change', '#badge_form', function () {
             console.log('change');
         })
     }
 
     private drawPaper(x: number, y: number, width: number, height: number, fill: string, k: number) {
-        this.drawShape(x, y, width / k, height / k, fill, k);
+        this.drawShape(x, y, width / k, height / k, fill);
     }
 
-    private drawBadge(x: number, y: number, width: number, height: number, fill: string, k: number) {
-        this.drawShape(x, y, width , height , fill, k);
+    private drawBadge(x: number, y: number, width: number, height: number, fill: string) {
+        this.drawShape(x, y, width, height, fill);
     }
 
-    private drawShape(x: number, y: number, w: number, h: number, fill: string, k: number) {
+    private drawShape(x: number, y: number, w: number, h: number, fill: string) {
         this.ctx.fillStyle = fill;
         this.ctx.fillRect(
             this.prepareX(x),

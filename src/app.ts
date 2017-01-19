@@ -40,5 +40,6 @@ export class App {
 
         var draw = new Draw(drawData);
         draw.drawAll();
+        draw.change();
     }
 }
