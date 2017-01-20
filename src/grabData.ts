@@ -29,30 +29,28 @@ export class GrabData {
     }
 
     dataToDraw() {
-        let dataToDraw: DataToDraw = {
+        return {
             paperSize: this.getPaperSize(),
             maxDrawArea: this.getMaxDrawArea()
         };
-        return dataToDraw;
     }
 
     getMaxDrawArea() {
-        let maxDrawArea: any = {
+        return {
             width: this.options.canvasOptions.width - 2 * this.options.canvasOptions.borderSpace,
             height: this.options.canvasOptions.height - 2 * this.options.canvasOptions.borderSpace
         };
-        return maxDrawArea;
     }
 
     getPaperSize() {
         // find orientation objects by format with sizes (L,P)
         let foundFormat = _.find(this.options.formats, (i, value: any) => {
-            return value === this.options.paperFormat;
+            return value === this.fieldsValues.paperFormat;
         });
 
         // find needed width/height object by orientation
         return _.find(foundFormat, (i, value: any) => {
-            return value === this.options.paperOrientation;
+            return value === this.fieldsValues.paperOrientation;
         });
     }
 

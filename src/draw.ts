@@ -52,12 +52,6 @@ export class Draw {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    change() {
-        $(document).on('change', '#badge_form', function () {
-            console.log('change');
-        })
-    }
-
     private drawPaper(x: number, y: number, width: number, height: number, fill: string, k: number) {
         this.drawShape(x, y, width / k, height / k, fill);
     }

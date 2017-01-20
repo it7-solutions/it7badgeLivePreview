@@ -4,9 +4,14 @@ import {PluginOptions} from "./models/PluginOptions";
 import {CalculateData} from "./calculateData";
 export class App {
     constructor(private options: PluginOptions) {
-        console.log('opt', options);
+        this.drawAll();
+        this.setChangeListener();
+    }
 
-        var grabData = new GrabData(options);
+    drawAll() {
+        console.log('opt', this.options);
+
+        var grabData = new GrabData(this.options);
 
         let paperSize = grabData.getPaperSize();
         let maxDrawArea = grabData.getMaxDrawArea();
@@ -40,6 +45,19 @@ export class App {
 
         var draw = new Draw(drawData);
         draw.drawAll();
-        draw.change();
     }
+
+    private destroyCanvas() {
+        console.log('destroy');
+        let $oldCanvas = $('#addCanvas').find('canvas');
+        $oldCanvas.remove();
+    }
+
+    setChangeListener() {
+        $(document).on('change keyup', '#badge_form', () => {
+            this.destroyCanvas();
+            this.drawAll();
+        })
+    }
+
 }
