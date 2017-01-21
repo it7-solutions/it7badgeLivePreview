@@ -28,15 +28,27 @@ export class Draw {
         );
 
         this.drawBadge(
-            0 + this.dataToDraw.badge.topMargin, //badge top corner x + margin top
-            0 + this.dataToDraw.badge.leftMargin, //badge top corner y + margin left
+            0 + this.dataToDraw.badge.leftMargin, //badge top corner x + margin left
+            0 + this.dataToDraw.badge.topMargin, //badge top corner y + margin top
 
             this.dataToDraw.badge.width,
             this.dataToDraw.badge.height,
 
-            this.dataToDraw.canvasOptions.badgeBackground,
+            this.dataToDraw.canvasOptions.badgeBackground
+        );
 
+        this.drawTopLine(
+            0,
+            0 + this.dataToDraw.badge.topMargin,
+            this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k,
+            0 + this.dataToDraw.badge.topMargin
+        );
 
+        this.drawLeftLine(
+            0 + this.dataToDraw.badge.leftMargin,
+            0,
+            0 + this.dataToDraw.badge.leftMargin,
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k
         );
     }
 
@@ -79,5 +91,33 @@ export class Draw {
     private prepareSize(n: number): number {
         return n * this.k;
     }
+
+    private drawLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: number) {
+        this.ctx.setLineDash([5, 3]);
+        this.ctx.beginPath();
+        this.ctx.moveTo(xFrom, yFrom);
+        this.ctx.lineTo(xTo, yTo);
+        this.ctx.stroke();
+    }
+
+    private drawTopLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: number) {
+        this.drawLine(
+            this.prepareX(xFrom),
+            this.prepareY(yFrom),
+            this.prepareX(xTo),
+            this.prepareY(yTo)
+        );
+    }
+
+    private drawLeftLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: number) {
+        this.drawLine(
+            this.prepareX(xFrom),
+            this.prepareY(yFrom),
+            this.prepareX(xTo),
+            this.prepareY(yTo)
+        );
+    }
+
+
 
 }
