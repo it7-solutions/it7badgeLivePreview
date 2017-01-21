@@ -37,18 +37,20 @@ export class Draw {
             this.dataToDraw.canvasOptions.badgeBackground
         );
 
-        this.drawTopLine(
+        this.drawTopBorder(
             0,
             0 + this.dataToDraw.badge.topMargin,
             this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k,
-            0 + this.dataToDraw.badge.topMargin
+            0 + this.dataToDraw.badge.topMargin,
+            this.dataToDraw.canvasOptions.borders.top
         );
 
-        this.drawLeftLine(
+        this.drawLeftBorder(
             0 + this.dataToDraw.badge.leftMargin,
             0,
             0 + this.dataToDraw.badge.leftMargin,
-            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k,
+            this.dataToDraw.canvasOptions.borders.left
         );
     }
 
@@ -92,7 +94,8 @@ export class Draw {
         return n * this.k;
     }
 
-    private drawLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: number) {
+    private drawLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: string) {
+        this.ctx.strokeStyle = fill;
         this.ctx.setLineDash([5, 3]);
         this.ctx.beginPath();
         this.ctx.moveTo(xFrom, yFrom);
@@ -100,21 +103,23 @@ export class Draw {
         this.ctx.stroke();
     }
 
-    private drawTopLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: number) {
+    private drawTopBorder(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string) {
         this.drawLine(
             this.prepareX(xFrom),
             this.prepareY(yFrom),
             this.prepareX(xTo),
-            this.prepareY(yTo)
+            this.prepareY(yTo),
+            fill
         );
     }
 
-    private drawLeftLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: number) {
+    private drawLeftBorder(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string) {
         this.drawLine(
             this.prepareX(xFrom),
             this.prepareY(yFrom),
             this.prepareX(xTo),
-            this.prepareY(yTo)
+            this.prepareY(yTo),
+            fill
         );
     }
 
