@@ -53,8 +53,18 @@ export class Draw {
             0 + this.dataToDraw.badge.leftMargin,
             0,
             0 + this.dataToDraw.badge.leftMargin,
-            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k,
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k - this.dataToDraw.canvasOptions.borders.marginBottomToPrint,
             this.dataToDraw.canvasOptions.borders.left,
+            [0, 0]
+        );
+
+        // drawRightBorder
+        this.drawBorder(
+            this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k - this.dataToDraw.canvasOptions.borders.marginRightToPrint,
+            0,
+            this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k - this.dataToDraw.canvasOptions.borders.marginRightToPrint,
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k - this.dataToDraw.canvasOptions.borders.marginBottomToPrint,
+            this.dataToDraw.canvasOptions.borders.right,
             [0, 0]
         );
 
@@ -85,6 +95,26 @@ export class Draw {
             this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height,
             this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k,
             this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height,
+            this.dataToDraw.canvasOptions.borders.rulers,
+            [5, 3]
+        );
+
+        // drawRightBorderMargin
+        this.drawBorder(
+            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin,
+            0,
+            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin,
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k,
+            this.dataToDraw.canvasOptions.borders.rulers,
+            [5, 3]
+        );
+
+        // drawBottomBorderMargin
+        this.drawBorder(
+            0,
+            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin,
+            this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k,
+            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin,
             this.dataToDraw.canvasOptions.borders.rulers,
             [5, 3]
         );
