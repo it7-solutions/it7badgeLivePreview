@@ -37,12 +37,14 @@ export class Draw {
             this.dataToDraw.canvasOptions.badgeBackground
         );
 
+        // borders
         this.drawTopBorder(
             0,
             0 + this.dataToDraw.badge.topMargin,
             this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k,
             0 + this.dataToDraw.badge.topMargin,
-            this.dataToDraw.canvasOptions.borders.top
+            this.dataToDraw.canvasOptions.borders.top,
+            [0, 0]
         );
 
         this.drawLeftBorder(
@@ -50,7 +52,36 @@ export class Draw {
             0,
             0 + this.dataToDraw.badge.leftMargin,
             this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k,
-            this.dataToDraw.canvasOptions.borders.left
+            this.dataToDraw.canvasOptions.borders.left,
+            [0, 0]
+        );
+
+        this.drawBottomBorder(
+            0,
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k - this.dataToDraw.canvasOptions.borders.marginBottomToPrint,
+            this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k,
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k - this.dataToDraw.canvasOptions.borders.marginBottomToPrint,
+            this.dataToDraw.canvasOptions.borders.bottom,
+            [0, 0]
+        );
+
+        // rulers
+        this.drawRightRuler(
+            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width,
+            0,
+            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width,
+            this.dataToDraw.paperSizeToAdapt.height / this.dataToDraw.paperSizeToAdapt.k,
+            this.dataToDraw.canvasOptions.borders.rulers,
+            [5, 3]
+        );
+
+        this.drawBottomRuler(
+            0,
+            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height,
+            this.dataToDraw.paperSizeToAdapt.width / this.dataToDraw.paperSizeToAdapt.k,
+            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height,
+            this.dataToDraw.canvasOptions.borders.rulers,
+            [5, 3]
         );
     }
 
@@ -94,33 +125,68 @@ export class Draw {
         return n * this.k;
     }
 
-    private drawLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill?: string) {
+    private drawLine(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string, dash: any) {
         this.ctx.strokeStyle = fill;
-        this.ctx.setLineDash([5, 3]);
+        this.ctx.setLineDash(dash);
         this.ctx.beginPath();
         this.ctx.moveTo(xFrom, yFrom);
         this.ctx.lineTo(xTo, yTo);
         this.ctx.stroke();
     }
 
-    private drawTopBorder(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string) {
+    private drawTopBorder(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string, dash: any) {
         this.drawLine(
             this.prepareX(xFrom),
             this.prepareY(yFrom),
             this.prepareX(xTo),
             this.prepareY(yTo),
-            fill
+            fill,
+            dash
         );
     }
 
-    private drawLeftBorder(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string) {
+    private drawLeftBorder(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string, dash: any) {
         this.drawLine(
             this.prepareX(xFrom),
             this.prepareY(yFrom),
             this.prepareX(xTo),
             this.prepareY(yTo),
-            fill
+            fill,
+            dash
         );
+    }
+
+    private drawBottomBorder(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string, dash: any) {
+        this.drawLine(
+            this.prepareX(xFrom),
+            this.prepareY(yFrom),
+            this.prepareX(xTo),
+            this.prepareY(yTo),
+            fill,
+            dash
+        )
+    }
+
+    private drawRightRuler(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string, dash: any) {
+        this.drawLine(
+            this.prepareX(xFrom),
+            this.prepareY(yFrom),
+            this.prepareX(xTo),
+            this.prepareY(yTo),
+            fill,
+            dash
+        )
+    }
+
+    private drawBottomRuler(xFrom: number, yFrom: number, xTo: number, yTo: number, fill: string, dash: any) {
+        this.drawLine(
+            this.prepareX(xFrom),
+            this.prepareY(yFrom),
+            this.prepareX(xTo),
+            this.prepareY(yTo),
+            fill,
+            dash
+        )
     }
 
 

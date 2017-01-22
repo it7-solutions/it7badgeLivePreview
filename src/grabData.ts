@@ -7,16 +7,16 @@ export class GrabData {
     badgeForm: string = '#badge_form';
 
     fieldsValues: PluginData = {
-        width               : $(this.badgeForm).find('[name="width"]').val(),
-        height              : $(this.badgeForm).find('[name="height"]').val(),
+        width               : parseInt($(this.badgeForm).find('[name="width"]').val()),
+        height              : parseInt($(this.badgeForm).find('[name="height"]').val()),
         paperOrientation    : $(this.badgeForm).find('[name="paper_orientation"]').val(),
         paperFormat         : $(this.badgeForm).find('[name="paper_format"]').val(),
         contentPosition     : $(this.badgeForm).find('[name="content_position"]').val(),
-        columnsCount        : $(this.badgeForm).find('[name="columns_count"]').val(),
-        leftMargin          : $(this.badgeForm).find('[name="left_margin"]').val(),
-        topMargin           : $(this.badgeForm).find('[name="top_margin"]').val(),
-        rightBadgeMargin    : $(this.badgeForm).find('[name="right_b_margin"]').val(),
-        bottomBadgeMargin   : $(this.badgeForm).find('[name="bottom_b_margin"]').val(),
+        columnsCount        : parseInt($(this.badgeForm).find('[name="columns_count"]').val()),
+        leftMargin          : parseInt($(this.badgeForm).find('[name="left_margin"]').val()),
+        topMargin           : parseInt($(this.badgeForm).find('[name="top_margin"]').val()),
+        rightBadgeMargin    : parseInt($(this.badgeForm).find('[name="right_b_margin"]').val()),
+        bottomBadgeMargin   : parseInt($(this.badgeForm).find('[name="bottom_b_margin"]').val()),
         // paperSize           : undefined
     };
 
