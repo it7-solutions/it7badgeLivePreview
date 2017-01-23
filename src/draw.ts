@@ -119,6 +119,15 @@ export class Draw {
             [5, 3]
         );
 
+        // TODO continue...
+        console.log('max badges by height',this.calculateMaxNumberOfBadgesByHeight(
+            this.dataToDraw.paperSizeToAdapt.height,
+            this.dataToDraw.badge.topMargin,
+            this.dataToDraw.canvasOptions.borders.marginBottomToPrint,
+            this.dataToDraw.badge.height,
+            this.dataToDraw.badge.bottomBadgeMargin
+        ));
+
     }
 
     private drawCanvas() {
@@ -179,6 +188,16 @@ export class Draw {
             fill,
             dash
         );
+    }
+
+    private calculateMaxNumberOfBadgesByHeight(
+        paperHeight: number,
+        topMargin: number,
+        marginBottomToPrint: number,
+        badgeHeight: number,
+        bottomBadgeMargin: number
+    ) {
+        return Math.floor((paperHeight - topMargin - marginBottomToPrint) / (badgeHeight + bottomBadgeMargin));
     }
 
 }
