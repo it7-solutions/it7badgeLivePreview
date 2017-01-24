@@ -1,6 +1,5 @@
 import {PluginConfig} from "./services/pluginConfig";
 import {PluginData} from "./models/PluginData";
-import {DataToDraw} from "./models/dataToDraw";
 export class GrabData {
     constructor(private options: PluginConfig) {}
 
@@ -16,23 +15,12 @@ export class GrabData {
         leftMargin          : parseInt($(this.badgeForm).find('[name="left_margin"]').val()),
         topMargin           : parseInt($(this.badgeForm).find('[name="top_margin"]').val()),
         rightBadgeMargin    : parseInt($(this.badgeForm).find('[name="right_b_margin"]').val()),
-        bottomBadgeMargin   : parseInt($(this.badgeForm).find('[name="bottom_b_margin"]').val()),
-        // paperSize           : undefined
+        bottomBadgeMargin   : parseInt($(this.badgeForm).find('[name="bottom_b_margin"]').val())
     };
 
     grabData(): any {
         console.log('grabData');
-
-        // add paper size option to draw properties object and return it
-        // return (<any>Object).assign(this.fieldsValues, {paperSize: this.getPaperSize()});
         return this.fieldsValues;
-    }
-
-    dataToDraw() {
-        return {
-            paperSize: this.getPaperSize(),
-            maxDrawArea: this.getMaxDrawArea()
-        };
     }
 
     getMaxDrawArea() {

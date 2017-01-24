@@ -6,7 +6,6 @@ export interface PluginOptions  {
     columnsCount: number,
     topMargin: number,
     leftMargin: number,
-    // paperOrientations: any[],
     paperOrientation: string,
     paperFormat: string,
     contentPosition: string,
