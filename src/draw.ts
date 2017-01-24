@@ -3,6 +3,9 @@ export class Draw {
     x: number;
     y: number;
 
+    offsetY: number; // this makes offset vertically between two badges including spacing between them
+    count: number; // we use this as counter inside loop while drawing badges
+
     maxBadgeCountByVertical: number;
 
     constructor(private dataToDraw: any) {
@@ -102,14 +105,18 @@ export class Draw {
         );
 
         // drawBottomRuler
+        this.offsetY = 0;
+        for (this.count = 1; this.count <= this.maxBadgeCountByVertical; this.count ++) {
         this.drawBorder(
             0,
-            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height,
+            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.offsetY,
             this.dataToDraw.paperSizeToAdapt.width / this.k,
-            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height,
+            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.offsetY,
             this.dataToDraw.canvasOptions.borders.rulers,
             [5, 3]
         );
+            this.offsetY += (this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin);
+        }
 
         // drawRightBorderMargin
         this.drawBorder(
@@ -122,14 +129,18 @@ export class Draw {
         );
 
         // drawBottomBorderMargin
-        this.drawBorder(
-            0,
-            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin,
-            this.dataToDraw.paperSizeToAdapt.width / this.k,
-            this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin,
-            this.dataToDraw.canvasOptions.borders.rulers,
-            [5, 3]
-        );
+        this.offsetY = 0;
+        for (this.count = 1; this.count <= this.maxBadgeCountByVertical; this.count ++) {
+            this.drawBorder(
+                0,
+                this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.offsetY + this.dataToDraw.badge.bottomBadgeMargin,
+                this.dataToDraw.paperSizeToAdapt.width / this.k,
+                this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.offsetY + this.dataToDraw.badge.bottomBadgeMargin,
+                this.dataToDraw.canvasOptions.borders.rulers,
+                [5, 3]
+            );
+            this.offsetY += (this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin);
+        }
 
     }
 
@@ -150,12 +161,11 @@ export class Draw {
     }
 
     private drawBadge(x: number, y: number, width: number, height: number, fill: string) {
-        var i: number,
-            bottomBadgeMargin: number = 0;
+        this.offsetY = 0;
         // draw maximum number of badges that paper height allows
-        for (i = 1; i <= this.maxBadgeCountByVertical; i ++) {
-            this.drawShape(x, y + bottomBadgeMargin, width, height, fill);
-            bottomBadgeMargin += (this.dataToDraw.badge.bottomBadgeMargin + this.dataToDraw.badge.height);
+        for (this.count = 1; this.count <= this.maxBadgeCountByVertical; this.count ++) {
+            this.drawShape(x, y + this.offsetY, width, height, fill);
+            this.offsetY += (this.dataToDraw.badge.bottomBadgeMargin + this.dataToDraw.badge.height);
         }
 
     }
