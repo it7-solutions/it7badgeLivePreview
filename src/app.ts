@@ -36,7 +36,8 @@ export class App {
                 leftMargin: grabbedData.leftMargin,
                 topMargin: grabbedData.topMargin,
                 bottomBadgeMargin: grabbedData.bottomBadgeMargin,
-                rightBadgeMargin: grabbedData.rightBadgeMargin
+                rightBadgeMargin: grabbedData.rightBadgeMargin,
+                columnsCount: grabbedData.columnsCount
             },
             paperSize: paperSize,
             maxDrawArea: maxDrawArea,

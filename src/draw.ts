@@ -4,9 +4,12 @@ export class Draw {
     y: number;
 
     offsetY: number; // this makes offset vertically between two badges including spacing between them
+    offsetX: number; // this makes offset horizontally between two badges including spacing between them
     count: number; // we use this as counter inside loop while drawing badges
+    countX: number;
 
     maxBadgeCountByVertical: number;
+    maxBadgeCountByHorizontal: number;
 
     constructor(private dataToDraw: any) {
         console.log('dataToDraw', dataToDraw);
@@ -24,7 +27,18 @@ export class Draw {
             this.dataToDraw.badge.bottomBadgeMargin
         );
 
+        this.maxBadgeCountByHorizontal = this.calculateMaxNumberOfBadgesByWidth(
+            this.dataToDraw.paperSize.width,
+            this.dataToDraw.badge.leftMargin,
+            this.dataToDraw.canvasOptions.borders.marginRightToPrint,
+            this.dataToDraw.badge.width,
+            this.dataToDraw.badge.rightBadgeMargin
+        );
+
+
+
         console.log('this.maxBadgeCountByVertical', this.maxBadgeCountByVertical);
+        console.log('this.maxBadgeCountByHorizontal', this.maxBadgeCountByHorizontal);
     }
 
     canvas: any = document.createElement('canvas');
@@ -162,10 +176,17 @@ export class Draw {
 
     private drawBadge(x: number, y: number, width: number, height: number, fill: string) {
         this.offsetY = 0;
+        this.offsetX = 0;
         // draw maximum number of badges that paper height allows
         for (this.count = 1; this.count <= this.maxBadgeCountByVertical; this.count ++) {
             this.drawShape(x, y + this.offsetY, width, height, fill);
             this.offsetY += (this.dataToDraw.badge.bottomBadgeMargin + this.dataToDraw.badge.height);
+        }
+
+
+        for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
+            this.drawShape(x + this.offsetX, y, width, height, fill);
+            this.offsetX += (this.dataToDraw.badge.rightBadgeMargin + this.dataToDraw.badge.width);
         }
 
     }
@@ -220,6 +241,16 @@ export class Draw {
     ) {
         // we add bottomBadgeMargin here in first part because we want to ignore adding bottomBadgeMargin on last iteration
         return Math.floor((paperHeight - topMargin - marginBottomToPrint + bottomBadgeMargin) / (badgeHeight + bottomBadgeMargin));
+    }
+
+    private calculateMaxNumberOfBadgesByWidth(
+        paperWidth: number,
+        leftMargin: number,
+        marginRightToPrint: number,
+        badgeWidth: number,
+        rightBadgeMargin: number
+    ) {
+        return Math.floor((paperWidth - leftMargin - marginRightToPrint + rightBadgeMargin) / (badgeWidth + rightBadgeMargin));
     }
 
 }
