@@ -109,14 +109,18 @@ export class Draw {
 
         // Rulers
         // drawRightRuler
-        this.drawBorder(
-            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width,
-            0,
-            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width,
-            this.dataToDraw.paperSizeToAdapt.height / this.k,
-            this.dataToDraw.canvasOptions.borders.rulers,
-            [5, 3]
-        );
+        this.offsetX = 0;
+        for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
+            this.drawBorder(
+                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
+                0,
+                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
+                this.dataToDraw.paperSizeToAdapt.height / this.k,
+                this.dataToDraw.canvasOptions.borders.rulers,
+                [5, 3]
+            );
+            this.offsetX += (this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin);
+        }
 
         // drawBottomRuler
         this.offsetY = 0;
@@ -133,14 +137,18 @@ export class Draw {
         }
 
         // drawRightBorderMargin
-        this.drawBorder(
-            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin,
-            0,
-            this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin,
-            this.dataToDraw.paperSizeToAdapt.height / this.k,
-            this.dataToDraw.canvasOptions.borders.rulers,
-            [5, 3]
-        );
+        this.offsetX = 0;
+        for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
+            this.drawBorder(
+                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
+                0,
+                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
+                this.dataToDraw.paperSizeToAdapt.height / this.k,
+                this.dataToDraw.canvasOptions.borders.rulers,
+                [5, 3]
+            );
+            this.offsetX += (this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin);
+        }
 
         // drawBottomBorderMargin
         this.offsetY = 0;
