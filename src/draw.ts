@@ -3,10 +3,10 @@ export class Draw {
     x: number;
     y: number;
 
-    offsetY: number; // this makes offset vertically between two badges including spacing between them
     offsetX: number; // this makes offset horizontally between two badges including spacing between them
-    count: number; // we use this as counter inside loop while drawing badges
-    countX: number;
+    offsetY: number; // this makes offset vertically between two badges including spacing between them
+    countX: number; // we use this as counter inside loop while drawing badges
+    countY: number;
 
     maxBadgeCountByVertical: number;
     maxBadgeCountByHorizontal: number;
@@ -120,7 +120,7 @@ export class Draw {
 
         // drawBottomRuler
         this.offsetY = 0;
-        for (this.count = 1; this.count <= this.maxBadgeCountByVertical; this.count ++) {
+        for (this.countY = 1; this.countY <= this.maxBadgeCountByVertical; this.countY ++) {
         this.drawBorder(
             0,
             this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.offsetY,
@@ -144,7 +144,7 @@ export class Draw {
 
         // drawBottomBorderMargin
         this.offsetY = 0;
-        for (this.count = 1; this.count <= this.maxBadgeCountByVertical; this.count ++) {
+        for (this.countY = 1; this.countY <= this.maxBadgeCountByVertical; this.countY ++) {
             this.drawBorder(
                 0,
                 this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.offsetY + this.dataToDraw.badge.bottomBadgeMargin,
@@ -177,16 +177,14 @@ export class Draw {
     private drawBadge(x: number, y: number, width: number, height: number, fill: string) {
         this.offsetY = 0;
         this.offsetX = 0;
-        // draw maximum number of badges that paper height allows
-        for (this.count = 1; this.count <= this.maxBadgeCountByVertical; this.count ++) {
-            this.drawShape(x, y + this.offsetY, width, height, fill);
+
+        for (this.countY = 1; this.countY <= this.maxBadgeCountByVertical; this.countY ++) {
+            for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
+                this.drawShape(x + this.offsetX, y + this.offsetY, width, height, fill);
+                this.offsetX += (this.dataToDraw.badge.rightBadgeMargin + this.dataToDraw.badge.width);
+            }
+            this.offsetX = 0; // reset offset by X after every iteration
             this.offsetY += (this.dataToDraw.badge.bottomBadgeMargin + this.dataToDraw.badge.height);
-        }
-
-
-        for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
-            this.drawShape(x + this.offsetX, y, width, height, fill);
-            this.offsetX += (this.dataToDraw.badge.rightBadgeMargin + this.dataToDraw.badge.width);
         }
 
     }
