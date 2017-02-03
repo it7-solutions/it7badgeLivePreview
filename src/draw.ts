@@ -35,10 +35,6 @@ export class Draw {
             this.dataToDraw.badge.rightBadgeMargin
         );
 
-
-
-        console.log('this.maxBadgeCountByVertical', this.maxBadgeCountByVertical);
-        console.log('this.maxBadgeCountByHorizontal', this.maxBadgeCountByHorizontal);
     }
 
     canvas: any = document.createElement('canvas');
@@ -187,8 +183,11 @@ export class Draw {
         this.offsetX = 0;
 
         for (this.countY = 1; this.countY <= this.maxBadgeCountByVertical; this.countY ++) {
-            for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
-                this.drawShape(x + this.offsetX, y + this.offsetY, width, height, fill);
+            // for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) { // draw max number of badges by width
+            for (this.countX = 1; this.countX <= this.dataToDraw.badge.columnsCount; this.countX ++) {
+                if(this.countX <= this.maxBadgeCountByHorizontal) {
+                    this.drawShape(x + this.offsetX, y + this.offsetY, width, height, fill); // do not allow to draw more badges, than width allows
+                }
                 this.offsetX += (this.dataToDraw.badge.rightBadgeMargin + this.dataToDraw.badge.width);
             }
             this.offsetX = 0; // reset offset by X after every iteration
