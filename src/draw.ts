@@ -106,16 +106,19 @@ export class Draw {
         // Rulers
         // drawRightRuler
         this.offsetX = 0;
-        for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
-            this.drawBorder(
-                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
-                0,
-                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
-                this.dataToDraw.paperSizeToAdapt.height / this.k,
-                this.dataToDraw.canvasOptions.borders.rulers,
-                [5, 3]
-            );
-            this.offsetX += (this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin);
+        // for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
+        for (this.countX = 1; this.countX <= this.dataToDraw.badge.columnsCount; this.countX ++) {
+            if (this.countX <= this.maxBadgeCountByHorizontal) {
+                this.drawBorder(
+                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
+                    0,
+                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
+                    this.dataToDraw.paperSizeToAdapt.height / this.k,
+                    this.dataToDraw.canvasOptions.borders.rulers,
+                    [5, 3]
+                );
+                this.offsetX += (this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin);
+            }
         }
 
         // drawBottomRuler
@@ -134,21 +137,24 @@ export class Draw {
 
         // drawRightBorderMargin
         this.offsetX = 0;
-        for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
-            this.drawBorder(
-                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
-                0,
-                this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
-                this.dataToDraw.paperSizeToAdapt.height / this.k,
-                this.dataToDraw.canvasOptions.borders.rulers,
-                [5, 3]
-            );
-            this.offsetX += (this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin);
+        // for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
+        for (this.countX = 1; this.countX < this.dataToDraw.badge.columnsCount; this.countX ++) {
+            if (this.countX < this.maxBadgeCountByHorizontal) {
+                this.drawBorder(
+                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
+                    0,
+                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
+                    this.dataToDraw.paperSizeToAdapt.height / this.k,
+                    this.dataToDraw.canvasOptions.borders.rulers,
+                    [5, 3]
+                );
+                this.offsetX += (this.dataToDraw.badge.width + this.dataToDraw.badge.rightBadgeMargin);
+            }
         }
 
         // drawBottomBorderMargin
         this.offsetY = 0;
-        for (this.countY = 1; this.countY <= this.maxBadgeCountByVertical; this.countY ++) {
+        for (this.countY = 1; this.countY < this.maxBadgeCountByVertical; this.countY ++) {
             this.drawBorder(
                 0,
                 this.dataToDraw.badge.topMargin + this.dataToDraw.badge.height + this.offsetY + this.dataToDraw.badge.bottomBadgeMargin,
