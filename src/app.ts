@@ -50,7 +50,7 @@ export class App {
 
     private destroyCanvas() {
         console.log('destroy');
-        let $oldCanvas = $('#addCanvas').find('canvas');
+        let $oldCanvas = $(this.options.canvasOptions.selector).find('canvas');
         $oldCanvas.remove();
     }
 
