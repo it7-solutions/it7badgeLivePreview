@@ -8,13 +8,12 @@
     "webpack:watch": "./node_modules/.bin/webpack --env.dev --watch",
     "webpack:prod": "./node_modules/.bin/webpack --env.prod -p",
     "prepublish": "tsc --module commonjs src/test.ts",
-    "pretest": "tsc src/tests/test.spec.ts --module commonjs",
-    "test": "mocha \"src/tests/**/*.spec.js\""
+    "pretest": "tsc tests/test.spec.ts --module commonjs",
+    "test": "mocha \"tests/**/*.spec.js\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jquery": "^2.0.39",
     "chai": "^3.5.0",
     "html-webpack-plugin": "^2.24.1",
     "mocha": "^3.2.0",
