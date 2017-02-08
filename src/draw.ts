@@ -53,7 +53,8 @@ export class Draw {
         );
 
         this.drawBadge(
-            0 + this.dataToDraw.badge.leftMargin, //badge top corner x + margin left
+            // 0 + this.dataToDraw.badge.leftMargin, //badge top corner x + margin left
+            this.calculateBadgePositionX(),
             0 + this.dataToDraw.badge.topMargin, //badge top corner y + margin top
 
             this.dataToDraw.badge.width,
@@ -264,4 +265,25 @@ export class Draw {
         return Math.floor((paperWidth - leftMargin - marginRightToPrint + rightBadgeMargin) / (badgeWidth + rightBadgeMargin));
     }
 
+    private calculateBadgePositionX() {
+        // we can calculate here the badge x position
+        if(this.dataToDraw.badge.contentPosition === 'center') {
+            return (this.dataToDraw.paperSizeToAdapt.width / this.k + this.dataToDraw.badge.leftMargin +
+                this.dataToDraw.badge.rightBadgeMargin) / 2  - (this.dataToDraw.badge.width +
+                this.dataToDraw.badge.rightBadgeMargin) / 2 * this.dataToDraw.badge.columnsCount
+        } else {
+            return this.dataToDraw.badge.leftMargin;
+        }
+    }
+
 }
+
+// this.drawBadge(
+//     0 + this.dataToDraw.badge.leftMargin, //badge top corner x + margin left
+//     0 + this.dataToDraw.badge.topMargin, //badge top corner y + margin top
+//
+//     this.dataToDraw.badge.width,
+//     this.dataToDraw.badge.height,
+//
+//     this.dataToDraw.canvasOptions.badgeBackground
+// );
