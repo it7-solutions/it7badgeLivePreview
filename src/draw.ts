@@ -111,9 +111,9 @@ export class Draw {
         for (this.countX = 1; this.countX <= this.dataToDraw.badge.columnsCount; this.countX ++) {
             if (this.countX <= this.maxBadgeCountByHorizontal) {
                 this.drawBorder(
-                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
+                    this.calculateRightMarginRulerPositionx(),
                     0,
-                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX,
+                    this.calculateRightMarginRulerPositionx(),
                     this.dataToDraw.paperSizeToAdapt.height / this.k,
                     this.dataToDraw.canvasOptions.borders.rulers,
                     [5, 3]
@@ -142,9 +142,9 @@ export class Draw {
         for (this.countX = 1; this.countX < this.dataToDraw.badge.columnsCount; this.countX ++) {
             if (this.countX < this.maxBadgeCountByHorizontal) {
                 this.drawBorder(
-                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
+                    this.calculateRightRulerPositionX(),
                     0,
-                    this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin,
+                    this.calculateRightRulerPositionX(),
                     this.dataToDraw.paperSizeToAdapt.height / this.k,
                     this.dataToDraw.canvasOptions.borders.rulers,
                     [5, 3]
@@ -268,6 +268,10 @@ export class Draw {
     private calculateBadgePositionX() {
         // we can calculate here the badge x position
         if(this.dataToDraw.badge.contentPosition === 'center') {
+            if(this.dataToDraw.badge.columnsCount > this.maxBadgeCountByHorizontal) {
+                this.dataToDraw.badge.columnsCount = this.maxBadgeCountByHorizontal;
+            }
+
             return (this.dataToDraw.paperSizeToAdapt.width / this.k + this.dataToDraw.badge.leftMargin +
                 this.dataToDraw.badge.rightBadgeMargin) / 2  - (this.dataToDraw.badge.width +
                 this.dataToDraw.badge.rightBadgeMargin) / 2 * this.dataToDraw.badge.columnsCount
@@ -276,14 +280,31 @@ export class Draw {
         }
     }
 
-}
+    private calculateRightMarginRulerPositionx () {
+        if(this.dataToDraw.badge.contentPosition === 'center') {
+            if(this.dataToDraw.badge.columnsCount > this.maxBadgeCountByHorizontal) {
+                this.dataToDraw.badge.columnsCount = this.maxBadgeCountByHorizontal;
+            }
 
-// this.drawBadge(
-//     0 + this.dataToDraw.badge.leftMargin, //badge top corner x + margin left
-//     0 + this.dataToDraw.badge.topMargin, //badge top corner y + margin top
-//
-//     this.dataToDraw.badge.width,
-//     this.dataToDraw.badge.height,
-//
-//     this.dataToDraw.canvasOptions.badgeBackground
-// );
+            return ((this.dataToDraw.paperSizeToAdapt.width / this.k + this.dataToDraw.badge.leftMargin +
+                this.dataToDraw.badge.rightBadgeMargin) / 2  - (this.dataToDraw.badge.width +
+                this.dataToDraw.badge.rightBadgeMargin) / 2 * this.dataToDraw.badge.columnsCount) + this.offsetX;
+
+        } else {
+            return this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX;
+        }
+    }
+
+    private calculateRightRulerPositionX() {
+        if(this.dataToDraw.badge.contentPosition === 'center') {
+
+            return ((this.dataToDraw.paperSizeToAdapt.width / this.k + this.dataToDraw.badge.leftMargin +
+                this.dataToDraw.badge.rightBadgeMargin) / 2  - (this.dataToDraw.badge.width +
+                this.dataToDraw.badge.rightBadgeMargin) / 2 * this.dataToDraw.badge.columnsCount) +
+                this.offsetX + this.dataToDraw.badge.width;
+        } else {
+            return this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin;
+        }
+    }
+
+}
