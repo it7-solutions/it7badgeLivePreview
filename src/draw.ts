@@ -53,7 +53,6 @@ export class Draw {
         );
 
         this.drawBadge(
-            // 0 + this.dataToDraw.badge.leftMargin, //badge top corner x + margin left
             this.calculateBadgePositionX(),
             0 + this.dataToDraw.badge.topMargin, //badge top corner y + margin top
 
@@ -107,7 +106,6 @@ export class Draw {
         // Rulers
         // drawRightRuler
         this.offsetX = 0;
-        // for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
         for (this.countX = 1; this.countX <= this.dataToDraw.badge.columnsCount; this.countX ++) {
             if (this.countX <= this.maxBadgeCountByHorizontal) {
                 this.drawBorder(
@@ -138,8 +136,13 @@ export class Draw {
 
         // drawRightBorderMargin
         this.offsetX = 0;
-        // for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) {
-        for (this.countX = 1; this.countX < this.dataToDraw.badge.columnsCount; this.countX ++) {
+        // draw border on last column of badges if they are centered
+        if(this.dataToDraw.badge.contentPosition === 'center') {
+            this.countX = 0;
+        } else {
+            this.countX = 1;
+        }
+        for (this.countX; this.countX < this.dataToDraw.badge.columnsCount; this.countX ++) {
             if (this.countX < this.maxBadgeCountByHorizontal) {
                 this.drawBorder(
                     this.calculateRightRulerPositionX(),
@@ -190,7 +193,6 @@ export class Draw {
         this.offsetX = 0;
 
         for (this.countY = 1; this.countY <= this.maxBadgeCountByVertical; this.countY ++) {
-            // for (this.countX = 1; this.countX <= this.maxBadgeCountByHorizontal; this.countX ++) { // draw max number of badges by width
             for (this.countX = 1; this.countX <= this.dataToDraw.badge.columnsCount; this.countX ++) {
                 if(this.countX <= this.maxBadgeCountByHorizontal) {
                     this.drawShape(x + this.offsetX, y + this.offsetY, width, height, fill); // do not allow to draw more badges, than width allows
