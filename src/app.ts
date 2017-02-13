@@ -1,4 +1,4 @@
-import {Draw} from "./Draw";
+import {DrawData} from "./drawData";
 import {GrabData} from './grabData';
 import {PluginOptions} from "./models/PluginOptions";
 import {CalculateData} from "./calculateData";
@@ -44,7 +44,7 @@ export class App {
             paperSizeToAdapt: paperSizeToAdapt
         };
 
-        var draw = new Draw(drawData);
+        var draw = new DrawData(drawData);
         draw.drawAll();
     }
 

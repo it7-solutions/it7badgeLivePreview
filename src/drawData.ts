@@ -1,4 +1,4 @@
-export class Draw {
+export class DrawData {
     k: number;
     x: number;
     y: number;

@@ -1,18 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "es6",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "strictNullChecks": true,
-    "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
   },
-  "files": [
-    "typings/globals/jquery/index.d.ts"
-  ],
   "exclude": [
-
     "node_modules",
     "dist"
   ]

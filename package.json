@@ -7,7 +7,7 @@
     "webpack:dev": "./node_modules/.bin/webpack --env.dev",
     "webpack:watch": "./node_modules/.bin/webpack --env.dev --watch",
     "webpack:prod": "./node_modules/.bin/webpack --env.prod -p",
-    "pretest": "tsc tests/calculateData.spec.ts --module commonjs",
+    "pretest": "tsc",
     "test": "mocha \"tests/**/*.spec.js\""
   },
   "author": "",

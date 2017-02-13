@@ -3,4 +3,5 @@ typings
 dist
 .idea/
 *.js
+*.map
 !webpack.config.js

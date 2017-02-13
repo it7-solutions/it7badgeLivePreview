@@ -1,6 +1,8 @@
 {
   "globalDependencies": {
+    "chai": "github:DefinitelyTyped/DefinitelyTyped/chai/chai.d.ts#ed38db403a56da84731a6f77b545762ee477a45b",
     "jquery": "registry:dt/jquery#1.10.0+20170104155652",
+    "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#db3a54c801e29e73bdaae327a64ed7991778c958",
     "node": "registry:dt/node#7.0.0+20170204020307",
     "underscore": "registry:dt/underscore#1.8.3+20161123125004"
   }
