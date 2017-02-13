@@ -297,11 +297,10 @@ export class DrawData {
 
     private calculateBadgePositionX() {
         // we can calculate here the badge x position
+        if(this.dataToDraw.badge.columnsCount > this.maxBadgeCountByHorizontal) {
+            this.dataToDraw.badge.columnsCount = this.maxBadgeCountByHorizontal;
+        }
         if(this.dataToDraw.badge.contentPosition === 'center') {
-            if(this.dataToDraw.badge.columnsCount > this.maxBadgeCountByHorizontal) {
-                this.dataToDraw.badge.columnsCount = this.maxBadgeCountByHorizontal;
-            }
-
             return (this.dataToDraw.paperSizeToAdapt.width / this.k + this.dataToDraw.badge.leftMargin +
                 this.dataToDraw.badge.rightBadgeMargin) / 2  - (this.dataToDraw.badge.width +
                 this.dataToDraw.badge.rightBadgeMargin) / 2 * this.dataToDraw.badge.columnsCount
@@ -311,11 +310,10 @@ export class DrawData {
     }
 
     private calculateRightMarginRulerPositionX () {
+        if(this.dataToDraw.badge.columnsCount > this.maxBadgeCountByHorizontal) {
+            this.dataToDraw.badge.columnsCount = this.maxBadgeCountByHorizontal;
+        }
         if(this.dataToDraw.badge.contentPosition === 'center') {
-            if(this.dataToDraw.badge.columnsCount > this.maxBadgeCountByHorizontal) {
-                this.dataToDraw.badge.columnsCount = this.maxBadgeCountByHorizontal;
-            }
-
             return ((this.dataToDraw.paperSizeToAdapt.width / this.k + this.dataToDraw.badge.leftMargin +
                 this.dataToDraw.badge.rightBadgeMargin) / 2  - (this.dataToDraw.badge.width +
                 this.dataToDraw.badge.rightBadgeMargin) / 2 * this.dataToDraw.badge.columnsCount) + this.offsetX;
