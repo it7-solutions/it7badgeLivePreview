@@ -109,9 +109,9 @@ export class DrawData {
         for (this.countX = 1; this.countX <= this.dataToDraw.badge.columnsCount; this.countX ++) {
             if (this.countX <= this.maxBadgeCountByHorizontal) {
                 this.drawBorder(
-                    this.calculateRightMarginRulerPositionx(),
+                    this.calculateRightMarginRulerPositionX(),
                     0,
-                    this.calculateRightMarginRulerPositionx(),
+                    this.calculateRightMarginRulerPositionX(),
                     this.dataToDraw.paperSizeToAdapt.height / this.k,
                     this.dataToDraw.canvasOptions.borders.rulers,
                     [5, 3]
@@ -170,6 +170,34 @@ export class DrawData {
             this.offsetY += (this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin);
         }
 
+        this.drawInfoPanel(
+            0,
+            this.dataToDraw.canvasOptions.height,
+            this.dataToDraw.canvasOptions.width,
+            20,
+            '#6f6f6f'
+        );
+
+        this.drawText(
+            'max columns count:' + this.maxBadgeCountByHorizontal + ' |',
+            7,
+            this.dataToDraw.canvasOptions.height + 13,
+            '#fff'
+        );
+
+        this.drawText(
+            'max rows count:' + this.maxBadgeCountByVertical + ' |',
+            160,
+            this.dataToDraw.canvasOptions.height + 13,
+            '#fff'
+        );
+
+        this.drawText(
+            'badges:' + this.maxBadgeCountByVertical * this.dataToDraw.badge.columnsCount + '/' + this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical,
+            294,
+            this.dataToDraw.canvasOptions.height + 13,
+            '#fff'
+        );
     }
 
     private drawCanvas() {
@@ -178,7 +206,7 @@ export class DrawData {
         $(document).find(this.dataToDraw.canvasOptions.selector).append(this.canvas);
 
         this.canvas.width = this.dataToDraw.canvasOptions.width;
-        this.canvas.height = this.dataToDraw.canvasOptions.height;
+        this.canvas.height = this.dataToDraw.canvasOptions.height + 20;
 
         this.ctx.fillStyle = this.dataToDraw.canvasOptions.canvasBackground;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -282,7 +310,7 @@ export class DrawData {
         }
     }
 
-    private calculateRightMarginRulerPositionx () {
+    private calculateRightMarginRulerPositionX () {
         if(this.dataToDraw.badge.contentPosition === 'center') {
             if(this.dataToDraw.badge.columnsCount > this.maxBadgeCountByHorizontal) {
                 this.dataToDraw.badge.columnsCount = this.maxBadgeCountByHorizontal;
@@ -307,6 +335,17 @@ export class DrawData {
         } else {
             return this.dataToDraw.badge.leftMargin + this.dataToDraw.badge.width + this.offsetX + this.dataToDraw.badge.rightBadgeMargin;
         }
+    }
+
+    private drawText(text: string, x: number, h: number, color: string) {
+        this.ctx.fillStyle = color;
+        this.ctx.font = "11px Courier";
+        this.ctx.fillText(text, x, h);
+    }
+
+    private drawInfoPanel(x: number, y: number, width: number, height: number, fill: string) {
+        this.ctx.fillStyle = fill;
+        this.ctx.fillRect(x, y, width, height);
     }
 
 }
