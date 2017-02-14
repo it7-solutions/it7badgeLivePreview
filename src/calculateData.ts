@@ -13,8 +13,7 @@ export class CalculateData {
     }
 
     calculateData() {
-        console.log('calculateData!!', this.dataToCalculate);
-
+        // console.log('calculateData!!', this.dataToCalculate);
         return this.sizeToAdapt(
             this.dataToCalculate.paperSize.width,
             this.dataToCalculate.paperSize.height,

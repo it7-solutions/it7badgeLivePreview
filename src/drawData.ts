@@ -12,7 +12,7 @@ export class DrawData {
     maxBadgeCountByHorizontal: number;
 
     constructor(private dataToDraw: any) {
-        console.log('dataToDraw', dataToDraw);
+        // console.log('dataToDraw', dataToDraw);
 
         this.k = dataToDraw.paperSizeToAdapt.k;
 
@@ -179,35 +179,34 @@ export class DrawData {
         );
 
         this.drawText(
-            'max columns count:' + this.maxBadgeCountByHorizontal,
+            'max columns count:' + this.checkForValidData(this.maxBadgeCountByHorizontal),
             15,
             this.dataToDraw.canvasOptions.height + 13,
             '#fff',
-            'left'
+            'left',
+            '11px Courier'
         );
 
         this.drawText(
-            'max rows count:' + this.maxBadgeCountByVertical,
-            // 160,
+            'max rows count:' + this.checkForValidData(this.maxBadgeCountByVertical),
             this.dataToDraw.canvasOptions.width/2 + 25,
             this.dataToDraw.canvasOptions.height + 13,
             '#fff',
-            'center'
+            'center',
+            '11px Courier'
         );
 
         this.drawText(
-            'badges:' + this.maxBadgeCountByVertical * this.dataToDraw.badge.columnsCount + '/' + this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical,
-            // 294,
+            'badges:' + this.checkForValidData(this.maxBadgeCountByVertical * this.dataToDraw.badge.columnsCount) + '/' + this.checkForValidData(this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical),
             this.dataToDraw.canvasOptions.width - 15,
             this.dataToDraw.canvasOptions.height + 13,
             '#fff',
-            'right'
+            'right',
+            '11px Courier'
         );
     }
 
-    private drawCanvas() {
-        console.log('drawCanvas');
-
+    drawCanvas() {
         $(document).find(this.dataToDraw.canvasOptions.selector).append(this.canvas);
 
         this.canvas.width = this.dataToDraw.canvasOptions.width;
@@ -340,9 +339,9 @@ export class DrawData {
         }
     }
 
-    private drawText(text: string, x: number, h: number, color: string, align: string) {
+    drawText(text: string, x: number, h: number, color: string, align: string, font: string) {
         this.ctx.fillStyle = color;
-        this.ctx.font = "11px Courier";
+        this.ctx.font = font;
         this.ctx.textAlign = align;
         this.ctx.fillText(text, x, h);
     }
@@ -350,6 +349,10 @@ export class DrawData {
     private drawInfoPanel(x: number, y: number, width: number, height: number, fill: string) {
         this.ctx.fillStyle = fill;
         this.ctx.fillRect(x, y, width, height);
+    }
+
+    private checkForValidData(val) {
+        return (val > 0 && val) ? val : 0;
     }
 
 }

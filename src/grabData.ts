@@ -19,7 +19,6 @@ export class GrabData {
     };
 
     grabData(): any {
-        console.log('grabData');
         return this.fieldsValues;
     }
 
