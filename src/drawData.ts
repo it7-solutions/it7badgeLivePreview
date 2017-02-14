@@ -179,24 +179,29 @@ export class DrawData {
         );
 
         this.drawText(
-            'max columns count:' + this.maxBadgeCountByHorizontal + ' |',
-            7,
+            'max columns count:' + this.maxBadgeCountByHorizontal,
+            15,
             this.dataToDraw.canvasOptions.height + 13,
-            '#fff'
+            '#fff',
+            'left'
         );
 
         this.drawText(
-            'max rows count:' + this.maxBadgeCountByVertical + ' |',
-            160,
+            'max rows count:' + this.maxBadgeCountByVertical,
+            // 160,
+            this.dataToDraw.canvasOptions.width/2 + 25,
             this.dataToDraw.canvasOptions.height + 13,
-            '#fff'
+            '#fff',
+            'center'
         );
 
         this.drawText(
             'badges:' + this.maxBadgeCountByVertical * this.dataToDraw.badge.columnsCount + '/' + this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical,
-            294,
+            // 294,
+            this.dataToDraw.canvasOptions.width - 15,
             this.dataToDraw.canvasOptions.height + 13,
-            '#fff'
+            '#fff',
+            'right'
         );
     }
 
@@ -335,9 +340,10 @@ export class DrawData {
         }
     }
 
-    private drawText(text: string, x: number, h: number, color: string) {
+    private drawText(text: string, x: number, h: number, color: string, align: string) {
         this.ctx.fillStyle = color;
         this.ctx.font = "11px Courier";
+        this.ctx.textAlign = align;
         this.ctx.fillText(text, x, h);
     }
 
