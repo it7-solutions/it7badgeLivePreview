@@ -32,7 +32,7 @@ export class CalculateData {
     }
 
     getRatio(paperWidth: number, paperHeight: number, maxDrawWidth: number, maxDrawHeight: number) : number {
-        if(paperWidth / paperHeight < 1) {
+        if(paperWidth / paperHeight < maxDrawWidth / maxDrawHeight) {
             return maxDrawHeight / paperHeight;
         } else {
             return maxDrawWidth / paperWidth;
