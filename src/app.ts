@@ -51,7 +51,7 @@ export class App {
             this.destroyCanvas();
             draw.drawCanvas();
             draw.drawText(
-                'Width and height can not be lower or equal zero!',
+                'Bad input data!',
                 this.drawData.canvasOptions.width / 2,
                 this.drawData.canvasOptions.height / 2,
                 'grey',
@@ -72,8 +72,23 @@ export class App {
             this.drawData.badge.height === 0 ||
             isNaN(this.drawData.badge.height)) {
             return false;
+        } else if(this.drawData.badge.columnsCount < 1 ||
+            isNaN(this.drawData.badge.columnsCount)) {
+            return false;
+        } else if(this.drawData.badge.leftMargin < 0 ||
+            isNaN(this.drawData.badge.leftMargin)) {
+            return false;
+        } else if(this.drawData.badge.topMargin < 0 ||
+            isNaN(this.drawData.badge.topMargin)) {
+            return false;
+        } else if(this.drawData.badge.rightBadgeMargin < 0 ||
+            isNaN(this.drawData.badge.rightBadgeMargin)) {
+            return false;
+        } else if(this.drawData.badge.bottomBadgeMargin < 0 ||
+            isNaN(this.drawData.badge.bottomBadgeMargin)) {
+            return false;
         } else {
-            return true;
+            return true
         }
     }
 
