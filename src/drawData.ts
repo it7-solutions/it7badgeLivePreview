@@ -175,34 +175,35 @@ export class DrawData {
             this.dataToDraw.canvasOptions.height,
             this.dataToDraw.canvasOptions.width,
             20,
-            '#6f6f6f'
+            this.dataToDraw.canvasOptions.infoPanel.background
         );
 
         this.drawText(
-            'max columns count:' + this.checkForValidData(this.maxBadgeCountByHorizontal),
+            this.dataToDraw.canvasOptions.infoPanel.texts.maxColumnsNumber + ': ' + this.checkForValidData(this.maxBadgeCountByHorizontal),
             15,
             this.dataToDraw.canvasOptions.height + 13,
-            '#fff',
+            this.dataToDraw.canvasOptions.infoPanel.texts.color,
             'left',
-            '11px Courier'
+            this.dataToDraw.canvasOptions.infoPanel.texts.font
         );
 
         this.drawText(
-            'max rows count:' + this.checkForValidData(this.maxBadgeCountByVertical),
-            this.dataToDraw.canvasOptions.width/2 + 25,
+            this.dataToDraw.canvasOptions.infoPanel.texts.maxRowsNumber + ': ' + this.checkForValidData(this.maxBadgeCountByVertical),
+            this.dataToDraw.canvasOptions.width / 2,
             this.dataToDraw.canvasOptions.height + 13,
-            '#fff',
+            this.dataToDraw.canvasOptions.infoPanel.texts.color,
             'center',
-            '11px Courier'
+            this.dataToDraw.canvasOptions.infoPanel.texts.font
         );
 
         this.drawText(
-            'badges:' + this.checkForValidData(this.maxBadgeCountByVertical * this.dataToDraw.badge.columnsCount) + '/' + this.checkForValidData(this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical),
+            this.dataToDraw.canvasOptions.infoPanel.texts.badgesQuantity + ': ' + this.checkForValidData(this.maxBadgeCountByVertical *
+                this.dataToDraw.badge.columnsCount) + ' / ' + this.checkForValidData(this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical),
             this.dataToDraw.canvasOptions.width - 15,
             this.dataToDraw.canvasOptions.height + 13,
-            '#fff',
+            this.dataToDraw.canvasOptions.infoPanel.texts.color,
             'right',
-            '11px Courier'
+            this.dataToDraw.canvasOptions.infoPanel.texts.font
         );
     }
 
