@@ -47,17 +47,11 @@ export class App {
 
         if(this.checkForValidData()) {
             draw.drawAll();
+            this.destroyErrorBox();
         } else {
             this.destroyCanvas();
-            draw.drawCanvas();
-            draw.drawText(
-                'Bad input data!',
-                this.drawData.canvasOptions.width / 2,
-                this.drawData.canvasOptions.height / 2,
-                'grey',
-                'center',
-                '17px Arial'
-            );
+            this.destroyPanelInfo();
+            draw.drawText('Bad input data!');
         }
     }
 
@@ -66,10 +60,20 @@ export class App {
         $oldCanvas.remove();
     }
 
+    private destroyPanelInfo() {
+        let $oldPanel = $(this.options.canvasOptions.selector).find('.infoPanel');
+        $oldPanel.remove();
+    }
+
+    private destroyErrorBox() {
+        let $oldErrorBox = $(this.options.canvasOptions.selector).find('.errorBox');
+        $oldErrorBox.remove();
+    }
+
     private checkForValidData () {
-        if(this.drawData.badge.width === 0 ||
+        if(this.drawData.badge.width < 1 ||
             isNaN(this.drawData.badge.width) ||
-            this.drawData.badge.height === 0 ||
+            this.drawData.badge.height < 1 ||
             isNaN(this.drawData.badge.height)) {
             return false;
         } else if(this.drawData.badge.columnsCount < 1 ||
@@ -95,6 +99,8 @@ export class App {
     setChangeListener() {
         $(document).on('change keyup', '#badge_form', () => {
             this.destroyCanvas();
+            this.destroyPanelInfo();
+            this.destroyErrorBox();
             this.drawAll();
         })
     }

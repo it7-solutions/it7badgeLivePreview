@@ -170,48 +170,19 @@ export class DrawData {
             this.offsetY += (this.dataToDraw.badge.height + this.dataToDraw.badge.bottomBadgeMargin);
         }
 
-        this.drawInfoPanel(
-            0,
-            this.dataToDraw.canvasOptions.height,
-            this.dataToDraw.canvasOptions.width,
-            20,
-            this.dataToDraw.canvasOptions.infoPanel.background
-        );
-
-        this.drawText(
-            this.dataToDraw.canvasOptions.infoPanel.texts.maxColumnsNumber + ': ' + this.checkForValidData(this.maxBadgeCountByHorizontal),
-            15,
-            this.dataToDraw.canvasOptions.height + 13,
-            this.dataToDraw.canvasOptions.infoPanel.texts.color,
-            'left',
-            this.dataToDraw.canvasOptions.infoPanel.texts.font
-        );
-
-        this.drawText(
-            this.dataToDraw.canvasOptions.infoPanel.texts.maxRowsNumber + ': ' + this.checkForValidData(this.maxBadgeCountByVertical),
-            this.dataToDraw.canvasOptions.width / 2,
-            this.dataToDraw.canvasOptions.height + 13,
-            this.dataToDraw.canvasOptions.infoPanel.texts.color,
-            'center',
-            this.dataToDraw.canvasOptions.infoPanel.texts.font
-        );
-
-        this.drawText(
-            this.dataToDraw.canvasOptions.infoPanel.texts.badgesQuantity + ': ' + this.checkForValidData(this.maxBadgeCountByVertical *
-                this.dataToDraw.badge.columnsCount) + ' / ' + this.checkForValidData(this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical),
-            this.dataToDraw.canvasOptions.width - 15,
-            this.dataToDraw.canvasOptions.height + 13,
-            this.dataToDraw.canvasOptions.infoPanel.texts.color,
-            'right',
-            this.dataToDraw.canvasOptions.infoPanel.texts.font
+        this.drawInfoPanelHTML(
+            this.dataToDraw.canvasOptions.infoPanel.texts.maxColumnsNumber + ': ' + '<span style="font-weight: bold">' + this.checkForValidData(this.maxBadgeCountByHorizontal) + '</span>',
+            this.dataToDraw.canvasOptions.infoPanel.texts.maxRowsNumber + ': ' + '<span style="font-weight: bold">' + this.checkForValidData(this.maxBadgeCountByVertical) + '</span>',
+            this.dataToDraw.canvasOptions.infoPanel.texts.badgesQuantity + ': ' + '<span style="font-weight: bold">' + this.checkForValidData(this.maxBadgeCountByVertical *
+                this.dataToDraw.badge.columnsCount) + ' / ' + this.checkForValidData(this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical) + '</span>'
         );
     }
 
-    drawCanvas() {
+    private drawCanvas() {
         $(document).find(this.dataToDraw.canvasOptions.selector).append(this.canvas);
 
         this.canvas.width = this.dataToDraw.canvasOptions.width;
-        this.canvas.height = this.dataToDraw.canvasOptions.height + 20;
+        this.canvas.height = this.dataToDraw.canvasOptions.height;
 
         this.ctx.fillStyle = this.dataToDraw.canvasOptions.canvasBackground;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -340,16 +311,38 @@ export class DrawData {
         }
     }
 
-    drawText(text: string, x: number, h: number, color: string, align: string, font: string) {
-        this.ctx.fillStyle = color;
-        this.ctx.font = font;
-        this.ctx.textAlign = align;
-        this.ctx.fillText(text, x, h);
+    private drawInfoPanelHTML(maxColumnsNumberText: string, maxRowsNumberText: string, badgesQuantityText: string) {
+        var infoPanelHTML = [
+            '<div class="infoPanel" style="background: #ffefd3; width: '+this.dataToDraw.canvasOptions.width+"px"+'">',
+                '<table width="100%" style="font-size: 11px; color: #b47301; font-family: Arial; text-transform: uppercase">',
+                    '<tr>',
+                        '<td align="center">'+maxColumnsNumberText+'</td>',
+                        '<td align="center">'+maxRowsNumberText+'</td>',
+                        '<td align="center">'+badgesQuantityText+'</td>',
+                    '</tr>',
+                '</table>',
+            '</div>'
+        ].join('');
+        var canvasContainer = $(this.dataToDraw.canvasOptions.selector);
+        if(!canvasContainer.find('.infoPanel').length) {
+            $(canvasContainer).append(infoPanelHTML);
+        }
     }
 
-    private drawInfoPanel(x: number, y: number, width: number, height: number, fill: string) {
-        this.ctx.fillStyle = fill;
-        this.ctx.fillRect(x, y, width, height);
+    drawText(text: string) {
+        var textHTML = [
+            '<div class="errorBox" style="height: '+this.dataToDraw.canvasOptions.height+"px"+'; background: '+this.dataToDraw.canvasOptions.canvasBackground+'">',
+                '<table style="height: 100%; width: 100%">',
+                    '<tr>',
+                        '<td align="center"><div style="color: #6f6f6f">'+text+'</div></td>',
+                    '</tr>',
+                '</table>',
+            '</div>'
+        ].join('');
+        var canvasContainer = $(this.dataToDraw.canvasOptions.selector);
+        if(!canvasContainer.find('.errorBox').length) {
+            $(canvasContainer).append(textHTML);
+        }
     }
 
     private checkForValidData(val) {
