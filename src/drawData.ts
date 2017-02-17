@@ -329,7 +329,7 @@ export class DrawData {
         }
     }
 
-    drawText(text: string) {
+    drawErrorText(text: string) {
         var textHTML = [
             '<div class="errorBox" style="height: '+this.dataToDraw.canvasOptions.height+"px"+'; background: '+this.dataToDraw.canvasOptions.canvasBackground+'">',
                 '<table style="height: 100%; width: 100%">',

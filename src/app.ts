@@ -51,7 +51,7 @@ export class App {
         } else {
             this.destroyCanvas();
             this.destroyPanelInfo();
-            draw.drawText('Bad input data!');
+            draw.drawErrorText('Bad input data!');
         }
     }
 
