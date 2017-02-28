@@ -1,6 +1,6 @@
 # it7badgeLivePreview
 
-![badge_demo](https://cloud.githubusercontent.com/assets/4949404/23385266/894f9388-fd57-11e6-89a1-8217cb4e570a.gif)
+![demo](https://github.com/it7-solutions/it7badgeLivePreview/blob/master/demo.gif)
 
 Badges live preview plugin allows you to calculate how many badges you can print on page, depending on spacing, size, format and orientation of the page
 # Installation
