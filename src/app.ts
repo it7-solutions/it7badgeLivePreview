@@ -53,6 +53,9 @@ export class App {
             this.destroyPanelInfo();
             draw.drawErrorText('Bad input data!');
         }
+
+        this.showOrHideDrawTwiceAdditionalOption(draw);
+
     }
 
     private destroyCanvas() {
@@ -103,6 +106,16 @@ export class App {
             this.destroyErrorBox();
             this.drawAll();
         })
+    }
+
+    private showOrHideDrawTwiceAdditionalOption(drawInstance) {
+        let $print_twice_select = $('[name="print_twice"]');
+        if(drawInstance.getMaxCountOfBadgesToDraw() === 1) {
+            $print_twice_select.closest('tr').show();
+        } else {
+            $print_twice_select.closest('tr').hide();
+            $print_twice_select.val(0);
+        }
     }
 
 }

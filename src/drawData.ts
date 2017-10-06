@@ -174,7 +174,7 @@ export class DrawData {
             this.dataToDraw.canvasOptions.infoPanel.texts.maxColumnsNumber + ': ' + '<span style="font-weight: bold">' + this.checkForValidData(this.maxBadgeCountByHorizontal) + '</span>',
             this.dataToDraw.canvasOptions.infoPanel.texts.maxRowsNumber + ': ' + '<span style="font-weight: bold">' + this.checkForValidData(this.maxBadgeCountByVertical) + '</span>',
             this.dataToDraw.canvasOptions.infoPanel.texts.badgesQuantity + ': ' + '<span style="font-weight: bold">' + this.checkForValidData(this.maxBadgeCountByVertical *
-                this.dataToDraw.badge.columnsCount) + ' / ' + this.checkForValidData(this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical) + '</span>'
+                this.dataToDraw.badge.columnsCount) + ' / ' + this.getMaxCountOfBadgesToDraw() + '</span>'
         );
     }
 
@@ -186,6 +186,10 @@ export class DrawData {
 
         this.ctx.fillStyle = this.dataToDraw.canvasOptions.canvasBackground;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    public getMaxCountOfBadgesToDraw() {
+        return this.maxBadgeCountByHorizontal * this.maxBadgeCountByVertical;
     }
 
     private drawPaper(x: number, y: number, width: number, height: number, fill: string, k: number) {
